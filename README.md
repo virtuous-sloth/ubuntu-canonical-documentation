@@ -100,10 +100,15 @@ and
 [details=Mapping table]
 | Path | Location |
 ```
-respectively. The comment hints that document serves two purposes:
+respectively. The comment hints that document serves three purposes:
 - providing the body text for the default page of `ubuntu.com/server/docs`
-- providing the navigation and redirect metadata for the menu for the same
-  section of the web site
+- providing the navigation metadata for the menu for the same section of the
+  web site
+- providing the redirect metadata for the links in that section of the web site
+
+Presumably itr also means there is a `discourse module` on the `ubuntu.com`
+site that enables the function of the discourse posts as source for the web
+site.
 ```
 00       1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
