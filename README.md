@@ -64,7 +64,46 @@ processes out the documentation site links into a
 
 ## ubuntu.com/server/docs
 
-Let's take a dive into `ubuntu.com/server/docs`
+Let's take a dive into `ubuntu.com/server/docs`. If you load the page and look
+at the bottom
+
+[This script](ubuntu.com-server-docs_table.sh):
+```bash
+#!/usr/bin/bash
+
+name=$(basename "$0" | sed -e 's/\.sh$//')
+url=$(echo $name | sed -e 's/_.*//' | tr - /)
+
+curl --silent "https://$url" \
+	| htmlparser 'json{}' \
+	| jq '.. | objects | select(.text == "Help improve this document in the forum") | .href' \
+	| tr '"' "\`" \
+	> "$name".md
+```
+fetches the URL of the link to what turns out to be to source for this page:
+`https://discourse.ubuntu.com/t/ubuntu-server-documentation/11322`
+Of course, the web page for the discourse forum post is note entirely the
+source, rather the source for the body of the posting is effectively the source
+for the documentation web page, written in markdown, up until the this comment:
+`<!-- Metadata for discourse module -->`
+What follows that comment are two sections headed
+```
+## Navigation
+
+[details=Navigation]
+| Level | Path | Navlink |
+```
+and
+```
+# Redirects
+
+[details=Mapping table]
+| Path | Location |
+```
+respectively. The comment hints that document serves two purposes:
+- providing the body text for the default page of `ubuntu.com/server/docs`
+- providing the navigation and redirect metadata for the menu for the same
+  section of the web site
 ```
 00       1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
