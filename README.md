@@ -109,6 +109,19 @@ respectively. The comment hints that document serves three purposes:
 Presumably itr also means there is a `discourse module` on the `ubuntu.com`
 site that enables the function of the discourse posts as source for the web
 site.
+
+# Dependencies
+
+The scripts use `curl`, `jq` and `csvlook` which are available in Ubuntu:
+```
+apt install curl jq csvkit
+```
+
+The also use `htmlparser` which is a golang tool:
+```
+go install github.com/htmlparser/htmlparser@latest
+```
+
 ```
 00       1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
